@@ -21,8 +21,8 @@
 pinningPlots <- function(parentDirectory, folderCount, user, overstory="CN", understory="CU", windowSize=2, minHeight=5){
   setwd(parentDirectory)
   folds <- list.files()
-  if(isFALSE(grepl(user,folds[1]))){
-    file.rename(folds[1],paste0(folds[1],"_",user))
+  if(isFALSE(grepl(user,folds[folderCount]))){
+    file.rename(folds[folderCount],paste0(folds[folderCount],"_",user))
   }
   folds <- list.files()
   print(folds[folderCount])
