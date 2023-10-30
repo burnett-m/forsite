@@ -6,7 +6,9 @@ R package for the modelling team at Forsite
 
 ## Installation guide
 `install.packages('remotes')`
+
 `remotes::install_github('burnett-m/forsite')`
+
 Now that the library has been installed on your machine, now import the library
 `library(forsite)`
 
