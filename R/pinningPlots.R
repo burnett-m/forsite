@@ -28,9 +28,11 @@ pinningPlots <- function(parentDirectory, folderCount, user, overstory="CN", und
   print(folds[folderCount])
 
   # Run these commands if there's no boundary file
-  boundaryCommand <- paste0("lasboundary -i ",gsub(paste0("_",user),"",folds[folderCount]),".las",
-                            " -o ",r"{boundary.shp}")
-  shell(paste0("cd ",folds[folderCount]," && ",boundaryCommand))
+  ## boundaryCommand <- paste0("lasboundary -i ",gsub(paste0("_",user),"",folds[folderCount]),".las",
+  ##                           " -o ",r"{boundary.shp}")
+  ## shell(paste0("cd ",folds[folderCount]," && ",boundaryCommand))
+  unbufferedLAS <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".las"))
+  boundarySF <- lidR::st_concave_hull(unbufferedLAS)
 
   las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".las"))
   ttops <- lidR::locate_trees(las,lidR::lmf(ws=windowSize,hmin = minHeight))
@@ -41,8 +43,8 @@ pinningPlots <- function(parentDirectory, folderCount, user, overstory="CN", und
   if(inputAccess!=1){stop()}
 
   #localSHP <- read_sf(paste0(parentDir,"\\",folds[count],"\\",gsub("_Michael","",folds[count]),".shp"))
-  localSHP <- sf::read_sf(paste0(parentDirectory,"\\",folds[folderCount],"\\boundary.shp"))
-  localSHP <- sf::st_zm(localSHP)
+  #localSHP <- sf::read_sf(paste0(parentDirectory,"\\",folds[folderCount],"\\boundary.shp"))
+  localSHP <- sf::st_zm(boundarySF)
   sf::st_transform(ttops,sf::st_crs(localSHP))
   sf::st_crs(ttops) <- sf::st_crs(localSHP)
   ttops1 <- sf::st_intersection(ttops,localSHP)
