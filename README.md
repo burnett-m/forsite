@@ -5,8 +5,6 @@ R package for the modelling team at Forsite
 
 
 ## Installation guide
-You will need to have LASTools already installed on your machine. Please visit the [LASTools webpage](https://lastools.github.io/) to get the latest version. Then you will need to add it to your PATH. 
-
 `install.packages('remotes')`
 
 Also install the tibble package separately since for some reason, that sf package dependency doesn't download on its own.
