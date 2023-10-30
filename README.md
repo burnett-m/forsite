@@ -7,6 +7,10 @@ R package for the modelling team at Forsite
 ## Installation guide
 `install.packages('remotes')`
 
+Also install the tibble package separately since for some reason, that sf package dependency doesn't download on its own.
+
+`install.packages('tibble')`
+
 `remotes::install_github('burnett-m/forsite')`
 
 Now that the library has been installed on your machine, now import the library
