@@ -13,7 +13,11 @@
 #'
 #' @return A roughly pinned plot in a treeTops.shp file. Must of the understory will be excluded.
 #'
+#' @export pinningPlots
 #' @examples
+#' # Use the following template
+#' # parentDir <- readClipboard() # after copying the file directory to your clipboard
+#' # pinningPlots(parentDir,1,'Michael')
 pinningPlots <- function(parentDirectory, folderCount, user, overstory="CN", understory="CU", windowSize=2, minHeight=5){
   setwd(parentDirectory)
   folds <- list.files()
