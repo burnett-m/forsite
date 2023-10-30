@@ -1,4 +1,4 @@
-# forsite
+# forsite - R Package
 ![license](https://img.shields.io/badge/License-R--package-green) 
 
 R package for the modelling team at Forsite
