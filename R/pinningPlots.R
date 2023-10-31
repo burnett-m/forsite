@@ -58,16 +58,29 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   names(ttops)[1] <- 'NAME' # Rename column
   ttops$NAME <- as.character(ttops$NAME)
   # Populate naming section
-  lasRange <- range(las$Z) # Get range of LAS
-  lasThresh <- (lasRange[2]*0.75)+(lasRange[1]*(1-0.75)) # Cut off to seperate L0 and L1
+  dtm <- lidR::rasterize_terrain(las,res=1,algorithm=lidR::tin()) # Create DTM from LAS
+  ttops$DTM <- terra::extract(dtm,ttops)[,2] # Get DTM cell value at pixel location
+  ttops$NormHeight <- ttops$Z - ttops$DTM # Access normalized height
+  MeanHeight_ttops <- mean(ttops$NormHeight)
   for(i in c(1:nrow(ttops))){ # Name OS and US
-    if(isTRUE(ttops$Z[i]>lasThresh)){
+    if(isTRUE(ttops$NormHeight[i]>MeanHeight_ttops)){
       ttops$NAME[i] <- paste0(overstory,"_1.00")
     }
     else{
       ttops$NAME[i] <- paste0(understory,"_1.00")
     }
   }
+
+  # lasRange <- range(las$Z) # Get range of LAS
+  # lasThresh <- (lasRange[2]*0.75)+(lasRange[1]*(1-0.75)) # Cut off to seperate L0 and L1
+  # for(i in c(1:nrow(ttops))){ # Name OS and US
+  #   if(isTRUE(ttops$Z[i]>lasThresh)){
+  #     ttops$NAME[i] <- paste0(overstory,"_1.00")
+  #   }
+  #   else{
+  #     ttops$NAME[i] <- paste0(understory,"_1.00")
+  #   }
+  # }
   # Remove any stem < 5m
   minLas <- min(las$Z)
   ttops <- ttops[which(ttops$Z >= minLas+minHeight),]

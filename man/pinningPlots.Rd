@@ -7,7 +7,6 @@
 pinningPlots(
   parentDirectory,
   folderCount,
-  user,
   overstory = "CN",
   understory = "CU",
   windowSize = 2,
@@ -18,8 +17,6 @@ pinningPlots(
 \item{parentDirectory}{string: The parent directory of your InProgress folder. The final folder in this directory must be your name (example:"...GT_Boxes/_inProgress/Michael). The easiest way to use this is to copy the directory (in Windows File Explorer, copy the entire directory at the top of the window, and in your R window, assign it to a variable like this : parentDir <- readClipboard(). Then use the 'parentDir' variable in this place).}
 
 \item{folderCount}{numerical: Since you will be working one folder at a time, start with the number 1 and after you have finished pinning that plot, use the number 2 (or if you immediately move that first plot to the Final folder, you can use 1 again).}
-
-\item{user}{string: Your name (the last folder name, after '_inProgress')}
 
 \item{overstory}{string: Overstory tree type. Default is 'CN', but you can change to 'DC' after viewing the plot.}
 
