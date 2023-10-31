@@ -22,8 +22,10 @@ First copy your working directory (your folder within the 'inProgress' folder) t
 
 `parentDir <- readClipboard()`
 
-Then, using the first folder in the list of folders (it counts based off of the first digit, so if you have two plots in your working directory which are plots 8 and 41, plot41 will be first since R lists folders based off of the first digit), use the pinningPlots function with your username.
+Then, use the first folder in the list of folders (it counts based off of the first digit, so if you have two plots in your working directory which are plots 8 and 41, plot41 will be first since R lists folders based off of the first digit).
 
-`pinningPlots(parentDir,1,'Michael')`
+`pinningPlots(parentDir,1)`
 
 If you want to change the overstory and understory, add `understory='DC'` to the function after your username. Same for windowSize and minHeight. For more information about the function, type `?pinningPlots` to the R console.
+
+`pinningPlots(parentDir,1,overstory='DC')`
