@@ -51,8 +51,11 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   #localSHP <- read_sf(paste0(parentDir,"\\",folds[count],"\\",gsub("_Michael","",folds[count]),".shp"))
   #localSHP <- sf::read_sf(paste0(parentDirectory,"\\",folds[folderCount],"\\boundary.shp"))
   localSHP <- sf::st_zm(boundarySF) # Remove Z
-  sf::st_transform(ttops,sf::st_crs(localSHP)) # Reproject
+  if(isFALSE(is.na(sf::st_crs(localSHP)))){ # Only follow next step if there is a coordinate system in LAS
+    sf::st_transform(ttops,sf::st_crs(localSHP)) # Reproject
+  }
   sf::st_crs(ttops) <- sf::st_crs(localSHP) # Copy projection in case first option didn't succeed
+
   ttops1 <- sf::st_intersection(ttops,localSHP) # Clip points to boundary
   ttops <- ttops[ttops$treeID %in% ttops1$treeID,] # Only keep elements within boundary
   names(ttops)[1] <- 'NAME' # Rename column

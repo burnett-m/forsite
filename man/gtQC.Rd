@@ -4,11 +4,20 @@
 \alias{gtQC}
 \title{Ground Truth Quality Control}
 \usage{
-gtQC(parentDirectory)
+gtQC(parentDirectory, buffered = FALSE)
 }
 \arguments{
 \item{parentDirectory}{string. The full '\emph{inProgress' directory after your user name. This process will rename every box in this folder with "}"+username.}
+
+\item{buffered}{logical. Change to \code{TRUE} if you would like to visualize the buffered LAZ description}
+}
+\value{
+A series of RGL windows visualizing the LAZ
 }
 \description{
 Used from your respective _inProgress folder to attach your name to the boxes and display all items simultaneously up until 120 RGL windows (and then stop since RGL is prone to crashing if too many windows are open)
+}
+\examples{
+# parentDir <- readClipboard() # After copying the GT boxes directory to your clipboard
+# gtQc(parentDir)
 }
