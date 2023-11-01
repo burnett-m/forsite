@@ -19,44 +19,46 @@ gtQC <- function(parentDirectory, buffered = FALSE){
   directories <- sapply(strsplit(parentDirectory,"\\\\"),"[") # Get list of folders in directory
   user <- directories[length(directories)] # Select last directory for user name
   # Find unique attributes in list
-  delimitedFolds <- data.frame(do.call('rbind',strsplit(as.character(folds),"_",fixed=TRUE)))
-  nonFolderElements <- list()
-  for(i in c(1:nrow(delimitedFolds))){
-    if(isTRUE(delimitedFolds[i,1]==delimitedFolds[i,2])){ # Remove non folders
-      folds <- folds[-i]
-      nonFolderElements <- rbind(nonFolderElements,i)
+  # delimitedFolds <- data.frame(do.call('rbind',strsplit(as.character(folds),"_",fixed=TRUE)))
+  # nonFolderElements <- list()
+  # for(i in c(1:nrow(delimitedFolds))){
+  #   if(isTRUE(delimitedFolds[i,1]==delimitedFolds[i,2])){ # Remove non folders
+  #     folds <- folds[-i]
+  #     nonFolderElements <- rbind(nonFolderElements,i)
+  #   }
+  #   # else(if(isTRUE(grepl('Box',delimitedFolds[3]))){
+  #   #   delimitedFolds[i,1] <- paste0(delimitedFolds[i,1],"_",delimitedFolds[i,2])
+  #   # })
+  # }
+
+  folds <- list.files()
+  folds <- folds[dir.exists(folds)]
+
+  # limit boxes to 120
+  points <- list()
+  folders <- list()
+  for(i in folds){ # Go through points SHP and find the box with 120th point
+    setwd(paste0(parentDirectory,"/",i))
+    pointsDBF <- foreign::read.dbf(list.files(pattern="*Points.dbf"))
+    for(j in as.character(pointsDBF$Stereo_SPP)){
+      points <- rbind(points,j) # create count to 100
     }
-    # else(if(isTRUE(grepl('Box',delimitedFolds[3]))){
-    #   delimitedFolds[i,1] <- paste0(delimitedFolds[i,1],"_",delimitedFolds[i,2])
-    # })
+    if(nrow(points) > 122){
+      break
+    }
+    folders <- rbind(folders,i)
   }
-  for(folder in folds){
+  for(folder in folders){
     if(isFALSE(grepl(user,folder))){ # If username is not already in folder name, rename the folders
       file.rename(folder,paste0(folder,"_",user))
     }
   }
 
-
-  folds <- list.files()
-  for(i in nonFolderElements){folds <- folds[-i]} # Remove non folders
-
-  # limit boxes to 120
-  points <- list()
-  for(i in folds){ # Go through points SHP and find the box with 120th point
-    setwd(paste0(parentDirectory,"/",i))
-    pointsDBF <- foreign::read.dbf(list.files(pattern=".*Points.*dbf"))
-    for(j in as.character(pointsDBF$BOX_ID)){
-      points <- rbind(points,j) # create count to 100
-    }
-    if(nrow(points) > 122){
-      finalFolder <- i
-      break
-    }
-  }
-  if(isTRUE(finalFolder>1)){folds <- folds[-c(which(folds==finalFolder):length(folds))]} # Remove any boxes past 120
+  print("Displaying the following GT Boxes : ") # Print the names of the GT Boxes that will be displayed
+  for(folder in folders){print(folder)}
 
   # Display all LAS
-  for(i in folds){
+  for(i in folders){
     setwd(paste0(parentDirectory,"/",i,"/trees"))
     if(isTRUE(buffered)){setwd("buffered")} # Go to buffered LAS to display those files instead
 
