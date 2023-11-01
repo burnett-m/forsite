@@ -29,3 +29,15 @@ Then, use the first folder in the list of folders (it counts based off of the fi
 If you want to change the overstory and understory, add `understory='DC'` to the function after your username. Same for windowSize and minHeight. For more information about the function, type `?pinningPlots` to the R console.
 
 `pinningPlots(parentDir,1,overstory='DC')`
+
+## GT QC
+This tool renames your folder to include your name at the end (if not already done so) and visualizes all of the GT Boxes you've included in that folder (up until 120, and then stops before the RGL windows forces R to crash).
+
+First, copy your working directory (your folder within the 'inProgress' folder) to your clipboard. Add it to a variable named 'parentDir'
+
+`parentDir <- readClipboard()`
+
+`gtQC(parentDir)`
+
+Then, you have the option to view the buffered or unbuffered LAZ. The default selection is to view the unbuffered, but if you would like to view the buffered LAZ, add `buffered = TRUE`. For example, `gtQC(parentDir,buffered = TRUE)`
+
