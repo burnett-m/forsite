@@ -82,8 +82,10 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   #   }
   # }
   # Remove any stem < 5m
-  minLas <- min(las$Z)
-  ttops <- ttops[which(ttops$Z >= minLas+minHeight),]
+  # minLas <- min(las$Z)
+  # ttops <- ttops[which(ttops$Z >= minLas+minHeight),]
+  ttops <- ttops[which(ttops$NormHeight >= 5),]
+
   ttops$COLOR <- 255 # Add color column for Fugro Viewer
   ttops$COLOR <- as.integer(ttops$COLOR)
   ttops$COMMENT <- "" # Add comment column for Fugro Viewer
