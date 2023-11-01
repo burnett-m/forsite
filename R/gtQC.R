@@ -6,7 +6,7 @@
 #' @param buffered logical. Change to `TRUE` if you would like to visualize the buffered LAZ description
 #'
 #' @return A series of RGL windows visualizing the LAZ
-#'
+#' @export gtQC
 #'
 #' @examples
 #' # parentDir <- readClipboard() # After copying the GT boxes directory to your clipboard

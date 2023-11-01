@@ -51,7 +51,8 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   #localSHP <- read_sf(paste0(parentDir,"\\",folds[count],"\\",gsub("_Michael","",folds[count]),".shp"))
   #localSHP <- sf::read_sf(paste0(parentDirectory,"\\",folds[folderCount],"\\boundary.shp"))
   localSHP <- sf::st_zm(boundarySF) # Remove Z
-  if(isFALSE(is.na(sf::st_crs(localSHP)))){ # Only follow next step if there is a coordinate system in LAS
+  localSHP_PRJ <- is.na(sf::st_crs(localSHP))
+  if(isFALSE(localSHP_PRJ)){ # Only follow next step if there is a coordinate system in LAS
     sf::st_transform(ttops,sf::st_crs(localSHP)) # Reproject
   }
   sf::st_crs(ttops) <- sf::st_crs(localSHP) # Copy projection in case first option didn't succeed
@@ -94,4 +95,7 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   ttops$COMMENT <- "" # Add comment column for Fugro Viewer
 
   sf::write_sf(ttops,paste0(parentDirectory,"\\",folds[folderCount],"\\treeTops.shp"),layer_options="SHPT=POINTZ") # Write SHP
+  if(isTRUE(localSHP_PRJ)){ # Only follow next step if there is a coordinate system in LAS
+    file.remove(paste0(parentDirectory,"\\",folds[folderCount],"\\treeTops.prj"))
+  }
 }
