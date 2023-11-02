@@ -42,16 +42,17 @@ gtQC <- function(parentDirectory, buffered = FALSE){
     for(j in as.character(pointsDBF$Stereo_SPP)){
       points <- rbind(points,j) # create count to 100
     }
+    setwd(parentDirectory)
+    if(isFALSE(grepl(user,i))){
+      file.rename(i,paste0(i,"_",user))
+      i <- paste0(i,"_",user) # rename i variable
+    }
     if(nrow(points) > 122){
       break
     }
     folders <- rbind(folders,i)
   }
-  for(folder in folders){
-    if(isFALSE(grepl(user,folder))){ # If username is not already in folder name, rename the folders
-      file.rename(folder,paste0(folder,"_",user))
-    }
-  }
+
 
   print("Displaying the following GT Boxes : ") # Print the names of the GT Boxes that will be displayed
   for(folder in folders){print(folder)}
@@ -75,7 +76,7 @@ gtQC <- function(parentDirectory, buffered = FALSE){
         })
       }
       else{
-        lidR::plot(las,size=4,pal=grDevices::terrain.colors(50),axis=TRUE,size=6)
+        lidR::plot(las,size=6,pal=grDevices::terrain.colors(30),axis=TRUE)
         rgl::bgplot3d({
           graphics::par(bg='black')
           graphics::plot.new()
