@@ -19,5 +19,5 @@ Used from your respective _inProgress folder to attach your name to the boxes an
 }
 \examples{
 # parentDir <- readClipboard() # After copying the GT boxes directory to your clipboard
-# gtQc(parentDir)
+# gtQC(parentDir)
 }

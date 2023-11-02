@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' # parentDir <- readClipboard() # After copying the GT boxes directory to your clipboard
-#' # gtQc(parentDir)
+#' # gtQC(parentDir)
 gtQC <- function(parentDirectory, buffered = FALSE){
   setwd(parentDirectory)
   folds <- list.files()
@@ -31,8 +31,7 @@ gtQC <- function(parentDirectory, buffered = FALSE){
   #   # })
   # }
 
-  folds <- list.files()
-  folds <- folds[dir.exists(folds)]
+  folds <- folds[dir.exists(folds)] # only select actual folders, and not files
 
   # limit boxes to 120
   points <- list()
@@ -67,7 +66,7 @@ gtQC <- function(parentDirectory, buffered = FALSE){
       l_file_name <- gsub("_buffered","",l_file)
       las <- lidR::readLAS(l_file)
       if(tolower(substr(l_file_name,nchar(l_file_name)-5,nchar(l_file_name)-4)) == 'sn' ||tolower(substr(l_file_name,nchar(l_file_name)-5,nchar(l_file_name)-4)) == 'dp' ){ # Plot Sn differently
-        lidR::plot(las,color='Intensity',axis=TRUE,pal=grDevices::grey.colors(20,start=0.1),legend=TRUE,size=4)
+        lidR::plot(las,color='Intensity',axis=TRUE,pal=grDevices::grey.colors(50,start=0.1),legend=TRUE,size=6)
         rgl::bgplot3d({
           graphics::par(bg='black')
           graphics::plot.new()
@@ -76,7 +75,7 @@ gtQC <- function(parentDirectory, buffered = FALSE){
         })
       }
       else{
-        lidR::plot(las,size=4,pal=grDevices::terrain.colors(50),axis=TRUE)
+        lidR::plot(las,size=4,pal=grDevices::terrain.colors(50),axis=TRUE,size=6)
         rgl::bgplot3d({
           graphics::par(bg='black')
           graphics::plot.new()
