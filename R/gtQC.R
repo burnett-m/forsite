@@ -67,7 +67,7 @@ gtQC <- function(parentDirectory, buffered = FALSE){
       l_file_name <- gsub("_buffered","",l_file)
       las <- lidR::readLAS(l_file)
       if(tolower(substr(l_file_name,nchar(l_file_name)-5,nchar(l_file_name)-4)) == 'sn' ||tolower(substr(l_file_name,nchar(l_file_name)-5,nchar(l_file_name)-4)) == 'dp' ){ # Plot Sn differently
-        lidR::plot(las,color='Intensity',axis=TRUE,pal=grDevices::grey.colors(50,start=0.1),legend=TRUE,size=6)
+        lidR::plot(las,color='Intensity',axis=TRUE,pal=grDevices::grey.colors,legend=TRUE,size=5)
         rgl::bgplot3d({
           graphics::par(bg='black')
           graphics::plot.new()
@@ -76,7 +76,7 @@ gtQC <- function(parentDirectory, buffered = FALSE){
         })
       }
       else{
-        lidR::plot(las,size=6,pal=grDevices::terrain.colors(30),axis=TRUE)
+        lidR::plot(las,size=5,pal=grDevices::terrain.colors,axis=TRUE)
         rgl::bgplot3d({
           graphics::par(bg='black')
           graphics::plot.new()
