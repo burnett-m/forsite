@@ -41,3 +41,15 @@ First, copy your working directory (your folder within the 'inProgress' folder) 
 
 Then, you have the option to view the buffered or unbuffered LAZ. The default selection is to view the unbuffered, but if you would like to view the buffered LAZ, add `buffered = TRUE`. For example, `gtQC(parentDir,buffered = TRUE)`
 
+## Intensity Graph Production
+This tool uses the merged LAS and shapefile containing all of the AGT stems merged within it to produce intensity graphs representing the intensity distribution amongst deciduous, conifer, dead, and all species. Please follow the instructions carefully to input the files correctly.
+
+For both agtLAS and agtSHP inputs, you will need to hold the "SHIFT" key down as you select the appropriate files (merged LAS and merged SHP), and DO NOT immediately type `agtLAS <- readClipboard()`. This will not input this file correctly. To see why, you must first type `readClipboard()` into the console to see how the path to that file is displayed. There are an extra set of quotation marks and an extra backslash that must be ommitted. You will need to do this for both files, and manually copy and paste it into the variable name (that ends with the file suffix, not a backslash).
+
+The output directory can be selected by simply creating a directory, selecting the file path at the top of the File Explorer window, and in the console, typing `outputDirectory <- readClipboard()`. This directory will contain all of the raw intensity files within a  **RawIntensity** folder. The raw histogram summary and a speciesCount.csv (containing number of shapes and points for each species) file will be exported to the output directory. The plots will be outputted to the **Plots** directory
+
+Please use an appropriate AOI name that will be used in the plot titles.
+
+Before continuing, please check the list of *decid*, *conifer*, and *dead* by typing in the console `?intensityGraphProduction`. I have inputted a default list of species I believe to be unique to each category, but future projects may reuse some of those abbreviations for a different species. Or, one of the species in your AOI may be absent from that list. In which case, you should input the list manually with a `c()`. For example, `dead <- c('SN','DA')`. If all of the species in the default lists are appropriate, you can leave these variables alone.
+
+`intensityGraphProduction(agtLAS, agtSHP, outputDirectory, "Current Project", conifer = c("SP","FB","FD"))`
