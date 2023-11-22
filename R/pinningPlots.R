@@ -36,10 +36,18 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   ## boundaryCommand <- paste0("lasboundary -i ",gsub(paste0("_",user),"",folds[folderCount]),".las",
   ##                           " -o ",r"{boundary.shp}")
   ## shell(paste0("cd ",folds[folderCount]," && ",boundaryCommand))
-  unbufferedLAS <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".las")) # Read unbuffered LAS
+  if(file.exists(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".las"))){
+    unbufferedLAS <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".las")) # Read unbuffered LAS
+  }
+  else{unbufferedLAS <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".laz"))} # Read unbuffered LAS
+
   boundarySF <- lidR::st_concave_hull(unbufferedLAS) # Make boundary for clipping
 
-  las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".las")) # Read buffered LAS to access treetops from it
+  if(file.exists(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".las"))){
+    las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".las")) # Read buffered LAS to access treetops from it
+  }
+  else{las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".laz"))} # Read buffered LAS to access treetops from it
+
   ttops <- lidR::locate_trees(las,lidR::lmf(ws=windowSize,hmin = minHeight)) # Locate tree tops
   x <- lidR::plot(las,bg="white",size=4) # Plot LAS
   lidR::add_treetops3d(x,ttops) # Plot tree tops
