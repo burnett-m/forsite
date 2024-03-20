@@ -17,7 +17,7 @@
 #' # Use the following template
 #' # parentDir <- readClipboard() # after copying the file directory to your clipboard
 #' # pinningPlots(parentDir,1,'Michael')
-pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understory="CU", windowSize=2, minHeight=5){
+pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understory="CU", windowSize=2.8, minHeight=5){
   setwd(parentDirectory) # set working directory
   folds <- list.files() # list folders
 
@@ -36,6 +36,8 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   ## boundaryCommand <- paste0("lasboundary -i ",gsub(paste0("_",user),"",folds[folderCount]),".las",
   ##                           " -o ",r"{boundary.shp}")
   ## shell(paste0("cd ",folds[folderCount]," && ",boundaryCommand))
+
+  # Get either LAS or LAZ files
   if(file.exists(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".las"))){
     unbufferedLAS <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),".las")) # Read unbuffered LAS
   }
@@ -43,10 +45,10 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
 
   boundarySF <- lidR::st_concave_hull(unbufferedLAS) # Make boundary for clipping
 
-  if(file.exists(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".las"))){
-    las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".las")) # Read buffered LAS to access treetops from it
+  if(file.exists(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),"_buffered.las"))){
+    las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),"_buffered.las")) # Read buffered LAS to access treetops from it
   }
-  else{las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\Buffered\\",gsub(paste0("_",user),"",folds[folderCount]),".laz"))} # Read buffered LAS to access treetops from it
+  else{las <- lidR::readLAS(paste0(parentDirectory,"\\",folds[folderCount],"\\",gsub(paste0("_",user),"",folds[folderCount]),"_buffered.laz"))} # Read buffered LAS to access treetops from it
 
   ttops <- lidR::locate_trees(las,lidR::lmf(ws=windowSize,hmin = minHeight)) # Locate tree tops
   x <- lidR::plot(las,bg="white",size=4) # Plot LAS
@@ -77,9 +79,11 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   for(i in c(1:nrow(ttops))){ # Name OS and US
     if(isTRUE(ttops$NormHeight[i]>MeanHeight_ttops)){
       ttops$NAME[i] <- paste0(overstory,"_1.00")
+      ttops$SPECIES[i] <- overstory
     }
     else{
       ttops$NAME[i] <- paste0(understory,"_1.00")
+      ttops$SPECIES[i] <- overstory
     }
   }
 
@@ -101,6 +105,9 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   ttops$COLOR <- 255 # Add color column for Fugro Viewer
   ttops$COLOR <- as.integer(ttops$COLOR)
   ttops$COMMENT <- "" # Add comment column for Fugro Viewer
+  ttops$Visibility <- "1.00"
+  for(i in c(1:nrow(ttops))){ttops$POI_INDEX[i] <- i}
+  ttops$Edge <- ""
 
   sf::write_sf(ttops,paste0(parentDirectory,"\\",folds[folderCount],"\\treeTops.shp"),layer_options="SHPT=POINTZ") # Write SHP
   if(isTRUE(localSHP_PRJ)){ # Only follow next step if there is a coordinate system in LAS

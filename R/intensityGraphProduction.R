@@ -63,7 +63,7 @@ intensityGraphProduction <- function(agtLAS,agtSHP,outDir,aoiName='AGT',decid=c(
     }
     temp_df <- data.frame(temp_int,temp_class)
     colnames(temp_df) <- c('Intensity','Classification')
-    temp_df <- temp_df[temp_df$Classification == 1 | temp_df$Classification == 2,]
+    temp_df <- temp_df[~temp_df$Classification == 1 | temp_df$Classification == 2,]
     if(isFALSE(dir.exists(paste0(outDir,"/RawIntensity")))){dir.create(paste0(outDir,'/',"RawIntensity"))}
     write.csv(temp_df,file=paste0(outDir,"/RawIntensity/",i,"_rawIntensity.csv"))
     utils::setTxtProgressBar(pb, which(shp_unique==i)) # Close the connection
