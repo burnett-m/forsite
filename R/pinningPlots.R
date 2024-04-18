@@ -115,7 +115,8 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   }
 
   # Zip files in easy to import file
-  files4Zip <- list.files(paste0(parentDirectory,"\\",folds[folderCount]),pattern="treeTops*")
-  zip(paste0(parentDirectory,"\\",folds[folderCount],"\\","treeTops.zip"),paste0(parentDirectory,"\\",folds[folderCount],"\\",files4Zip))
-  file.remove(paste0(parentDirectory,"\\",folds[folderCount],"\\",files4Zip))
+  setwd(paste0(parentDirectory,"\\",folds[folderCount]))
+  files4Zip <- list.files(pattern="treeTops*")
+  zip("treeTops.zip",files4Zip)
+  file.remove(files4Zip)
 }
