@@ -100,7 +100,7 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   # Remove any stem < 5m
   # minLas <- min(las$Z)
   # ttops <- ttops[which(ttops$Z >= minLas+minHeight),]
-  ttops <- ttops[which(ttops$NormHeight >= 5),]
+  ttops <- ttops[which(ttops$NormHeight >= minHeight),]
 
   ttops$COLOR <- 255 # Add color column for Fugro Viewer
   ttops$COLOR <- as.integer(ttops$COLOR)
@@ -113,4 +113,9 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   if(isTRUE(localSHP_PRJ)){ # Only follow next step if there is a coordinate system in LAS
     file.remove(paste0(parentDirectory,"\\",folds[folderCount],"\\treeTops.prj"))
   }
+
+  # Zip files in easy to import file
+  files4Zip <- list.files(paste0(parentDirectory,"\\",folds[folderCount]),pattern="treeTops*")
+  zip(paste0(parentDirectory,"\\",folds[folderCount],"\\","treeTops.zip"),paste0(parentDirectory,"\\",folds[folderCount],"\\",files4Zip))
+  file.remove(paste0(parentDirectory,"\\",folds[folderCount],"\\",files4Zip))
 }
