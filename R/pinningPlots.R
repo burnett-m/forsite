@@ -118,5 +118,5 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   setwd(paste0(parentDirectory,"\\",folds[folderCount]))
   files4Zip <- list.files(pattern="treeTops*")
   zip("treeTops.zip",files4Zip)
-  file.remove(files4Zip)
+  #file.remove(files4Zip) # zip() doesn't work for everyone, so make sure these files aren't deleted
 }
