@@ -33,6 +33,9 @@ If you want to change the overstory and understory, add `understory='DC'` to the
 ## viewAllLAZ
 This tool allows the user to view all LAZ/LAS files within a directory one-by-one. Use `?viewAllLAZ` for a full description of how to use it.
 
+## changeZgeometry_fromHeight
+This tool allows the user to add the data from the HEIGHT column to the current Z geometry of a shapefile to change the coordinates of each of that shapefile's vertices (Z + HEIGHT).
+
 ## GT QC (defunct)
 This tool renames your folder to include your name at the end (if not already done so) and visualizes all of the GT Boxes you've included in that folder (up until 120, and then stops before the RGL windows forces R to crash).
 
