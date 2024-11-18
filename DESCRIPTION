@@ -1,6 +1,6 @@
 Package: forsite
 Title: Modelling Team R Package
-Version: 1.4.2
+Version: 1.5.0
 Authors@R: 
     person("Michael", "Burnett", , "mburnett@forsite.com", role = c("aut", "cre"))
 Description: This is a package specifically for the modelling team at Forsite.
