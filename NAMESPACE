@@ -3,6 +3,7 @@
 export(gtQC)
 export(intensityGraphProduction)
 export(pinningPlots)
+export(viewAllLAZ)
 importFrom(dplyr,bind_cols)
 importFrom(grDevices,rainbow)
 importFrom(graphics,hist)

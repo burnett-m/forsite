@@ -9,7 +9,7 @@ pinningPlots(
   folderCount,
   overstory = "CN",
   understory = "CU",
-  windowSize = 2,
+  windowSize = 2.8,
   minHeight = 5
 )
 }
