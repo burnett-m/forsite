@@ -25,7 +25,7 @@ viewAllLAZ <- function(lazFile){
   z <- temp_laz@data$Z
   # Plot
   rgl::open3d()
-  rgl::plot3d(x,y,z,col=terrain.colors(length(x)),size=3,main=lazFile,axes=F,xlab="",ylab="",zlab="")#,type="s")
+  rgl::plot3d(x,y,z,col=terrain.colors(length(z))[as.numeric(cut(z, breaks=length(z)))],size=3,main=lazFile,axes=F,xlab="",ylab="",zlab="")#,type="s")
 
   # Wait for the user to close the rgl window before continuing to the next file
   cat("Close the rgl window to continue to the next file.\n")
