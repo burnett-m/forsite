@@ -58,8 +58,6 @@ pinningPlots <- function(parentDirectory, folderCount, overstory="CN", understor
   inputAccess <- utils::menu(c("Yes","No"),"Would you like to proceed? (Type a number)")
   if(inputAccess!=1){stop()}
 
-  #localSHP <- read_sf(paste0(parentDir,"\\",folds[count],"\\",gsub("_Michael","",folds[count]),".shp"))
-  #localSHP <- sf::read_sf(paste0(parentDirectory,"\\",folds[folderCount],"\\boundary.shp"))
   localSHP <- sf::st_zm(boundarySF) # Remove Z
   localSHP_PRJ <- is.na(sf::st_crs(localSHP))
   if(isFALSE(localSHP_PRJ)){ # Only follow next step if there is a coordinate system in LAS
