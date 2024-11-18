@@ -30,7 +30,10 @@ If you want to change the overstory and understory, add `understory='DC'` to the
 
 `pinningPlots(parentDir,1,overstory='DC')`
 
-## GT QC
+## viewAllLAZ
+This tool allows the user to view all LAZ/LAS files within a directory one-by-one. Use `?viewAllLAZ` for a full description of how to use it.
+
+## GT QC (defunct)
 This tool renames your folder to include your name at the end (if not already done so) and visualizes all of the GT Boxes you've included in that folder (up until 120, and then stops before the RGL windows forces R to crash).
 
 First, copy your working directory (your folder within the 'inProgress' folder) to your clipboard. Add it to a variable named 'parentDir'
@@ -41,7 +44,7 @@ First, copy your working directory (your folder within the 'inProgress' folder) 
 
 Then, you have the option to view the buffered or unbuffered LAZ. The default selection is to view the unbuffered, but if you would like to view the buffered LAZ, add `buffered = TRUE`. For example, `gtQC(parentDir,buffered = TRUE)`
 
-## Intensity Graph Production
+## Intensity Graph Production (defunct)
 This tool uses the merged LAS and shapefile containing all of the AGT stems merged within it to produce intensity graphs representing the intensity distribution amongst deciduous, conifer, dead, and all species. Please follow the instructions carefully to input the files correctly.
 
 For both *agtLAS* and *agtSHP* inputs, you will need to hold the "SHIFT" key down as you select the appropriate files (merged LAS and merged SHP), and DO NOT immediately type `agtLAS <- readClipboard()`. This will not input this file correctly. To see why, you must first type `readClipboard()` into the console to see how the path to that file is displayed. There are an extra set of quotation marks and an extra backslash that must be ommitted. You will need to do this for both files, and manually copy and paste it into the variable name (that ends with the file suffix, not a backslash).
