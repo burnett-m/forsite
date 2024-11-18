@@ -15,7 +15,7 @@
 #' }
 viewAllLAZ <- function(lazFile){
   temp_laz <- lidR::readLAS(lazFile)
-  if(is.empty(temp_laz)){ # In case there is no laz
+  if(lidR::is.empty(temp_laz)){ # In case there is no laz
     cat(paste0("Skipping empty laz file: ",lazFile))
     return()
   }
