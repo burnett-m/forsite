@@ -15,7 +15,7 @@
 #' for(file in files){
 #'   reclassifyLAZ(file)
 #' }
-reclassifyLAZ <- function(lazFile,lazClasses = c(LASLOWVEGETATION,LASMEDIUMVEGETATION,LASHIGHVEGETATION,LASBUILDING)){
+reclassifyLAZ <- function(lazFile,lazClasses = c(3,4,5,6)){
   las <- lidR::readLAS(lazFile)
   for(class in lazClasses){
     las$Classification[las$Classification == class] <- LASUNCLASSIFIED
