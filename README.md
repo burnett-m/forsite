@@ -36,6 +36,9 @@ This tool allows the user to view all LAZ/LAS files within a directory one-by-on
 ## changeZgeometry_fromHeight
 This tool allows the user to add the data from the HEIGHT column to the current Z geometry of a shapefile to change the coordinates of each of that shapefile's vertices (Z + HEIGHT).
 
+## reclassifyLAZ
+This tool reclassifies points classified as low (3), medium (4), and high (5) vegetation as well as buildings (6) into unclassified (1).
+
 ## GT QC (defunct)
 This tool renames your folder to include your name at the end (if not already done so) and visualizes all of the GT Boxes you've included in that folder (up until 120, and then stops before the RGL windows forces R to crash).
 
