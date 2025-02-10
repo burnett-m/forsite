@@ -27,7 +27,7 @@ changeZgeometry_fromHeight <- function(shapefile,output = gsub(".shp","_fixedZ.s
         sf::st_sf() # from sfc to sf
       sf::st_geometry(temp_subset) <- sf::st_geometry(temp_poly) # write geometry back into original data
       sf::st_crs(temp_subset) <- sf::st_crs(shp)
-      sf::st_geometry(shp_sf[i,]) <- sf::st_geometry(temp_subset)
+      sf::st_geometry(shp[i,]) <- sf::st_geometry(temp_subset)
     }
     sf::write_sf(shp,output,layer_options="SHPT=POLYGONZ")
   }
