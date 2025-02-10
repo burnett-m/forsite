@@ -2,8 +2,8 @@
 % Please edit documentation in R/changeZgeometry_fromHeight.R
 \name{changeZgeometry_fromHeight}
 \alias{changeZgeometry_fromHeight}
-\title{Change Z Geometry for a shapefile based on HEIGHT column
-Uses the numerical values in the HEIGHT column to add to its present elevation (Z) data to present polygons that are Z + HEIGHT in elevation.}
+\title{Change Z Geometry for a shapefile based on HEIGHT column.}
+Uses the numerical values in the HEIGHT column to add to its present elevation (Z) data to present polygons that are Z + HEIGHT in elevation.
 \usage{
 changeZgeometry_fromHeight(
   shapefile,
