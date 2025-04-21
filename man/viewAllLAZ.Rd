@@ -5,10 +5,12 @@
 \title{viewAllLAZ
 Displays all LAZ files  from a list, one by one.}
 \usage{
-viewAllLAZ(lazFile)
+viewAllLAZ(lazFile, plotView = FALSE)
 }
 \arguments{
-\item{lazFile}{filename: A string representative of a singular LAZ/LAS file}
+\item{lazFile}{filenames: A string representative of a singular LAZ/LAS file}
+
+\item{plotView}{boolean: TRUE if you want a generalized view of the point cloud with file name, FALSE if you want a superior rendering with poor filename quality}
 }
 \value{
 The RGL window displays a LAS point cloud
@@ -21,7 +23,5 @@ Displays all LAZ files  from a list, one by one.
 parentDir <- readClipboard() # Read the directory path of a folder containing several LAZ/LAS files
 setwd(parentDir)
 files <- list.files(pattern="*.laz")
-for(file in files){
-  viewAllLAZ(file)
-}
+for(file in files){viewAllLAS(file)}
 }

@@ -29,7 +29,7 @@ viewAllLAZ <- function(lazFile,plotView = FALSE){
 
   }
   else{
-    plot(temp_laz,size=4)
+    lidR::plot(temp_laz,size=4)
     rgl::bgplot3d({
       par(bg='black')
       plot.new()

@@ -4,10 +4,7 @@
 \alias{reclassifyLAZ}
 \title{Reclassify LAZ to LASUNCLASSIFIED}
 \usage{
-reclassifyLAZ(
-  lazFile,
-  lazClasses = c(LASLOWVEGETATION, LASMEDIUMVEGETATION, LASHIGHVEGETATION, LASBUILDING)
-)
+reclassifyLAZ(lazFile, lazClasses = c(3, 4, 5, 6))
 }
 \arguments{
 \item{lazFile}{filename : This can be an item in a list or a singular filename}
