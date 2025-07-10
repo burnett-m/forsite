@@ -24,10 +24,18 @@ sourceIDviewing <- function(mainDir, targetDir,plot_prefix, plotNUM){
   # Prepare the classification
   source_ids <- unique(temp_laz@data$PointSourceID)
   n <- length(source_ids)
-  classification_map <- setNames(((seq_along(source_ids) - 1) %% 16) + 1, source_ids) # Create mapping: SourceID → Classification (1 to 16, cycling)
+  classification_map <- setNames(((seq_along(source_ids) - 1) %% 30) + 1, source_ids) # Create mapping: SourceID → Classification (1 to 16, cycling)
   temp_laz@data$Classification <- classification_map[as.character(temp_laz@data$PointSourceID)] # Apply the mapping to the LAS data
   #print(unique(temp_laz@data$Classification)) # ✅ Optional: check unique classifications assigned
   temp_laz@data$Classification <- as.integer(temp_laz@data$Classification)
 
-  lidR::plot(temp_laz, size = 7, color = "Classification") # Plot using RGB color mode
+  custom_palette <- c(
+    "#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00",
+    "#FFFF33", "#A65628", "#F781BF", "#999999", "#66C2A5",
+    "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F",
+    "#E5C494", "#B3B3B3", "#1B9E77", "#D95F02", "#7570B3",
+    "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666",
+    "#A1D99B", "#9ECAE1", "#FDB462", "#BC80BD", "#CCEBC5"
+  )
+  lidR::plot(temp_laz, size = 7, color = "Classification", pal = custom_palette) # Plot using RGB color mode
 }
