@@ -1,6 +1,6 @@
 #' Source ID Viewing for Voxel Segmentation LAS
 #'
-#' @param mainDir directory : The full directory to the location of the RESULTS from the voxel segmentation (The parent directory of the target segmentation folders)
+#' @param resultsDirectory directory : The full directory to the location of the RESULTS from the voxel segmentation (The parent directory of the target segmentation folders)
 #' @param targetDir string : The folder name for the segmentation results to be displayed
 #' @param plot_prefix string : The prefix to each plot. Please include every character up until the number for the plot (for example: "Tolko_Greensled_Plot_"). The "_DISPLAY.laz" is implied.
 #' @param plotNUM numerical : The plot number to be displayed
@@ -8,17 +8,17 @@
 #' @returns An RGL window displaying the classified point cloud for the plot.
 #'
 #' @examples
-#' mainDir <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\BaseTarget"
+#' resultsDirectory <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\BaseTarget"
 #' targetDir <- "target36"
 #' plot_prefix <- "Tolko_Greensled_Plot_"
 #' plotNUM <- 100
 #'
-#' sourceIDviewing(mainDir,targetDir,plot_prefix, plotNUM)
+#' voxelSegCal_sourceIDviewing(resultsDirectory,targetDir,plot_prefix, plotNUM)
 
 
 
-voxelSegCal_sourceIDviewing <- function(mainDir, targetDir,plot_prefix, plotNUM){
-  setwd(paste0(mainDir,"//",targetDir))
+voxelSegCal_sourceIDviewing <- function(resultsDirectory, targetDir,plot_prefix, plotNUM){
+  setwd(paste0(resultsDirectory,"//",targetDir))
   temp_laz <- lidR::readLAS(paste0(plot_prefix,as.character(plotNUM),"_DISPLAY.laz"))
 
   # Prepare the classification
