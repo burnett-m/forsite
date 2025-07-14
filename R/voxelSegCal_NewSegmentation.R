@@ -3,6 +3,7 @@
 #' @param CFG_filename filename(string) : Full path to the input CFG file to run the segmentation from
 #' @param resultsDirectory directory(string) : Directory containing all of the folders for the results
 #' @param voxelSegmentationEXE_directory filename(string) : Full path to the VoxelSegmentationCPU.exe with all helper files in the same directory
+#' @param Dropbox_directory directory(string) : Directory on Dropbox where to copy the new target folder to
 #' @param allPinTestSummary_directory filename(string) :  Full path to the CSV containing the statistical results based on POIs
 #'
 #' @returns New voxel segmentation with statistical results from the main columns
@@ -11,10 +12,11 @@
 #' #cfgFilename <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\_TolkoGS_NewFormat_Voxel_SegCal.cfg"
 #' #resultsDirectory <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\BaseTarget"
 #' #voxelSegEXE_dir <- "C:\\Forsite\\voxelSeg_training\\VoxelSegEXE\\VoxelSegmentationCPU.exe"
+#' #dropbox_dir <- "C:\\Users\\MichaelBurnett\\LiDAR Inventory group Dropbox\\Project Data\\OR\\Tolko\\Tolko_Sask\\_GreenSled\\SegCal\\_Results"
 #' #allPinTestSummary_dir <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\BaseTarget\\all_Pin_All_Test_Summary_No_Edge.csv"
 #' #voxelSegCal_NewSegmentation(cfgFilename,resultsDirectory,voxelSegEXE_dir,allPinTestSummary_dir)
 #'
-voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSegmentationEXE_directory, allPinTestSummary_directory){
+voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSegmentationEXE_directory, Dropbox_directory, allPinTestSummary_directory){
   # Function for updating the CFG target directory name
   create_new_target_dir <- function(target_path) {
     target_basename <- basename(target)
@@ -58,6 +60,9 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
 
   setwd(dirname(voxelSegmentationEXE_directory))
   system(paste(basename(voxelSegmentationEXE_directory),"-OP_TYPE=1",cfgFilename,sep=" "))
+
+  setwd(resultsDirectory)
+  fs::dir_copy(paste0("target",base_target), Dropbox_directory)
 
   allPinTestSummary <- read.csv(allPinTestSummary_directory)
   knitr::kable(allPinTestSummary[c(1:15)])
