@@ -42,7 +42,8 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
   cfg <- ini::read.ini(CFG_filename) # Read CFG file
   segParams <- colnames(as.data.frame(cfg$`Seg Params`))
   target <- cfg$`File/Directory Config`$TARGETDIR
-  cfg$`File/Directory Config`$TARGETDIR <- create_new_target_dir(target)
+  newTargetDir <- create_new_target_dir(target)
+  cfg$`File/Directory Config`$TARGETDIR <- newTargetDir
 
   base_target <- readline("Which target number should we base this new segmentation on?")
   setwd(paste0(resultsDirectory,"\\target",base_target))
@@ -62,7 +63,9 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
   system(paste(basename(voxelSegmentationEXE_directory),"-OP_TYPE=1",cfgFilename,sep=" "))
 
   setwd(resultsDirectory)
-  fs::dir_copy(paste0("target",base_target), Dropbox_directory)
+  newTargetDir_split <- strsplit(newTargetDir,"\\\\")[[1]]
+  newTargetDir_newTarget <- newTargetDir_split[length(newTargetDir_split)]
+  fs::dir_copy(newTargetDir_newTarget, Dropbox_directory)
 
   allPinTestSummary <- read.csv(allPinTestSummary_directory)
   knitr::kable(allPinTestSummary[c(1:15)])
