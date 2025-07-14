@@ -21,5 +21,8 @@ Imports:
 	ggplot2,
 	openxlsx,
 	readxl,
+	knitr,
+	fs,
+	ini,
 	scales,
 	utils
