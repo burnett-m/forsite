@@ -61,7 +61,7 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
   ini::write.ini(cfg,CFG_filename)
 
   setwd(dirname(voxelSegmentationEXE_directory))
-  system(paste(basename(voxelSegmentationEXE_directory),"-OP_TYPE=1",cfgFilename,sep=" "))
+  system(paste(basename(voxelSegmentationEXE_directory),"-OP_TYPE=1",CFG_filename,sep=" "))
 
   setwd(resultsDirectory)
   newTargetDir_split <- strsplit(newTargetDir,"\\\\")[[1]]
