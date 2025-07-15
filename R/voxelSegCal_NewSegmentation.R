@@ -94,5 +94,8 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
   # Set up config log
   configLog <- voxelSegCal_DisplayConfigLog(resultsDirectory)
   write.csv(configLog,paste0(Dropbox_directory,"\\configLog.csv"))
+
+  # Copy the Pin Test Summary
+  file.copy(allPinTestSummary_directory,paste0(Dropbox_directory,"\\",basename(allPinTestSummary_directory)))
 }
 
