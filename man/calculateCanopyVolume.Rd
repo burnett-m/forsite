@@ -4,7 +4,13 @@
 \alias{calculateCanopyVolume}
 \title{Calculate Canopy Volume}
 \usage{
-calculateCanopyVolume(lazFiles, shapefile, threshold, outputDir)
+calculateCanopyVolume(
+  lazFiles,
+  shapefile,
+  threshold,
+  outputDir,
+  OverstrikeColumn = "NONE"
+)
 }
 \arguments{
 \item{lazFiles}{filenames(list of strings): Set the working directory to where the LAZ files are located and access a list of LAZ files}
@@ -14,6 +20,8 @@ calculateCanopyVolume(lazFiles, shapefile, threshold, outputDir)
 \item{threshold}{numeric: The height at which to clip all LAZ points below it out.}
 
 \item{outputDir}{directory(string): Full path to the output location.}
+
+\item{OverstrikeColumn}{column name (string): The name of the column containing the overstrike distance (perhaps it is called FallD2Line in post-intrusion codes production) to add to the threshold to generate a new canopy volume based on threshold + overstrike distance. This number is generally negative.}
 }
 \value{
 Clipped LAZ and an updated shapefile containing the CANOPYVOL field

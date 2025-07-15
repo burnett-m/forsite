@@ -17,7 +17,7 @@
 
 
 
-voxelSegCal_sourceIDviewing <- function(resultsDirectory, targetDir,plot_prefix, plotNUM){
+voxelSegCal_sourceIDviewing  <- function(resultsDirectory, targetDir,plot_prefix, plotNUM){
   setwd(paste0(resultsDirectory,"//",targetDir))
   temp_laz <- lidR::readLAS(paste0(plot_prefix,as.character(plotNUM),"_DISPLAY.laz"))
 
