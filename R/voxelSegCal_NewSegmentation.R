@@ -57,7 +57,7 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
   parameter_value <- readline("What should we change it to?")
 
   cfg$`Seg Params`[segParams[as.numeric(parameter_to_tweak)]] <- parameter_value
-  ini::write.ini(cfg,cfgFilename)
+  ini::write.ini(cfg,CFG_filename)
 
   setwd(dirname(voxelSegmentationEXE_directory))
   system(paste(basename(voxelSegmentationEXE_directory),"-OP_TYPE=1",cfgFilename,sep=" "))
