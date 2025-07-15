@@ -3,6 +3,7 @@
 #' @param resultsDirectory directory(string) : Directory containing all of the folders for the results
 #'
 #' @returns segParameters data frame containing all of the logs
+#' @export
 #'
 #' @examples
 #' #voxelSegCal_DisplayConfigLog("C:\\Tolko\\Greensled\\BaseTarget")

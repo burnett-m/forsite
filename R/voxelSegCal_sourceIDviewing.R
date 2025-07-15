@@ -6,6 +6,7 @@
 #' @param plotNUM numerical : The plot number to be displayed
 #'
 #' @returns An RGL window displaying the classified point cloud for the plot.
+#' @export
 #'
 #' @examples
 #' resultsDirectory <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\BaseTarget"

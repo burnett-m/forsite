@@ -7,6 +7,7 @@
 #' @param allPinTestSummary_directory filename(string) :  Full path to the CSV containing the statistical results based on POIs
 #'
 #' @returns New voxel segmentation with statistical results from the main columns
+#' @export
 #'
 #' @examples
 #' #cfgFilename <- "C:\\Forsite\\Tolko\\GreenSled_voxelSeg\\_TolkoGS_NewFormat_Voxel_SegCal.cfg"
