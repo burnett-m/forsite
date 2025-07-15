@@ -23,5 +23,5 @@ voxelSegCal_DisplayConfigLog <- function(resultsDirectory){
     rownames(segParameters)[which(folds == i)] <- gsub("./","",i)
     setwd("..")
   }
-  segParameters <<- segParameters
+  return(segParameters)
 }

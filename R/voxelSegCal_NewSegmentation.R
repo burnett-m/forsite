@@ -39,6 +39,26 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
 
     return(new_dir_path)
   }
+  # Function for producing the seg cal config log
+  voxelSegCal_DisplayConfigLog <- function(resultsDirectory){
+    setwd(resultsDirectory)
+    folds <- list.dirs(recursive = FALSE)
+    folds <- folds[order(as.numeric(gsub("\\D","",folds)))] # Makes the order of the folders proper
+    for(i in folds){
+      setwd(i)
+      segmentation_cfg <- ini::read.ini(list.files(pattern="*.cfg"))
+      if(i == folds[1]){
+        segParameters <- as.data.frame(segmentation_cfg$`Seg Params`)
+      }
+      else{
+        segParameters <- rbind(segParameters,as.data.frame(segmentation_cfg$`Seg Params`))
+      }
+      rownames(segParameters)[which(folds == i)] <- gsub("./","",i)
+      setwd("..")
+    }
+    return(segParameters)
+  }
+
 
   cfg <- ini::read.ini(CFG_filename) # Read CFG file
   segParams <- colnames(as.data.frame(cfg$`Seg Params`))
@@ -71,5 +91,8 @@ voxelSegCal_NewSegmentation <- function(CFG_filename, resultsDirectory, voxelSeg
   allPinTestSummary <- read.csv(allPinTestSummary_directory)
   knitr::kable(allPinTestSummary[c(1:15)])
 
+  # Set up config log
+  configLog <- voxelSegCal_DisplayConfigLog(resultsDirectory)
+  write.csv(configLog,paste0(Dropbox_directory,"\\configLog.csv"))
 }
 
