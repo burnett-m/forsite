@@ -1,13 +1,12 @@
 Package: forsite
 Title: Modelling Team R Package
-Version: 1.7.3
+Version: 1.8
 Authors@R: 
     person("Michael", "Burnett", , "mburnett@forsite.com", role = c("aut", "cre"))
 Description: This is a package specifically for the modelling team at Forsite.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Imports: 
     lidR,
 	terra,
@@ -20,9 +19,13 @@ Imports:
 	dplyr,
 	ggplot2,
 	openxlsx,
+	openxlsx2,
 	readxl,
 	knitr,
 	fs,
 	ini,
 	scales,
+	leaflet,
+	shiny,
 	utils
+Config/roxygen2/version: 8.1.0
