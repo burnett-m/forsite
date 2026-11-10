@@ -16,8 +16,8 @@ A slimmed down Excel file with the selected sheets removed
 Reads a large Excel file that may be too difficult to open in Excel and removes sheets from it based on a provided range.
 }
 \examples{
-main_dir <- "C:/Forsite"
-setwd(main_dir)
-filename <- "WF_AreaD_AllSpecies_Scorecard_Nargess.xlsm"
-slim_workbook(filename)
+#main_dir <- "C:/Forsite"
+#setwd(main_dir)
+#filename <- "WF_AreaD_AllSpecies_Scorecard_Nargess.xlsm"
+#slim_workbook(filename)
 }

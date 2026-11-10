@@ -23,8 +23,8 @@ Change Z Geometry for a shapefile based on HEIGHT column
 Uses the numerical values in the HEIGHT column to add to its present elevation (Z) data to present polygons that are Z + HEIGHT in elevation.
 }
 \examples{
-shpDir <- readClipboard() # Read the directory path of the folder containing the shapefile you would like to fix
-setwd(shpDir)
-files <- list.files(pattern="*.shp")
-changeZgeometry_fromHeight(files[1]) # Fixes the Z geometry of the first shapefile listed in that directory
+#shpDir <- readClipboard() # Read the directory path of the folder containing the shapefile you would like to fix
+#setwd(shpDir)
+#files <- list.files(pattern="*.shp")
+#changeZgeometry_fromHeight(files[1]) # Fixes the Z geometry of the first shapefile listed in that directory
 }

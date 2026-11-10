@@ -41,12 +41,12 @@ Visualizing the stage1 results for poor quality polys
 This tool generates a shiny app that displays the subset of production polys within the threshold of uncovered stage1 polygons.
 }
 \examples{
-# Copy the output directory from your File Explorer to your clipboard
-output <- readClipboard()  # Adds the output in the format R needs
-# Copy path to the project's production shapefiles SHP
-readClipboard() # This prints the full path to the console
-productionShapefiles <- "C:\\\\Forsite\\\\LakeBabine\\\\Lake_Babine_ProductionPolys.shp"
-# Repeat the same step for the _MergedCSV.csv output from the stage1QCbatch job after running csv_merge
+### Copy the output directory from your File Explorer to your clipboard
+#output <- readClipboard()  # Adds the output in the format R needs
+### Copy path to the project's production shapefiles SHP
+#readClipboard() # This prints the full path to the console
+#productionShapefiles <- "C:\\Forsite\\LakeBabine\\Lake_Babine_ProductionPolys.shp"
+### Repeat the same step for the _MergedCSV.csv output from the stage1QCbatch job after running csv_merge
 #mergedCSV <- "C:\\Forsite\\LakeBabine\\stage1_multiseg\\burnt_areas_SegCal\\Merged_QC\\_MergedCSV.csv"
 
 #visualize_stage1QC(productionShapefiles,

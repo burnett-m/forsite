@@ -10,12 +10,12 @@
 #' @export calculateCanopyVolume
 #'
 #' @examples
-#' lazDir <- readClipboard() # Copy the path to the LAZ files from File Explorer
-#' setwd(lazDir)
-#' lazFiles <- list.files(pattern="*.laz")
-#' shapefile <- "initialShapes.shp"
-#' dir.create("output")
-#' calculateCanopyVolume(lazFiles,shapefile,threshold=10,outputDir=paste0(getwd(),"//output"))
+#' #lazDir <- readClipboard() # Copy the path to the LAZ files from File Explorer
+#' #setwd(lazDir)
+#' #lazFiles <- list.files(pattern="*.laz")
+#' #shapefile <- "initialShapes.shp"
+#' #dir.create("output")
+#' #calculateCanopyVolume(lazFiles,shapefile,threshold=10,outputDir=paste0(getwd(),"//output"))
 calculateCanopyVolume <- function(lazFiles, shapefile, threshold, outputDir, OverstrikeColumn = "NONE"){
   initialShapes <- sf::read_sf(shapefile) # Read shapefile
   initialShapes$CANOPYVOL <- 0 # Generate empty canopy volume field

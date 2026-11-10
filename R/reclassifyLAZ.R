@@ -9,12 +9,12 @@
 #' @export reclassifyLAZ
 #'
 #' @examples
-#' parentDirectory <- readClipboard() # Read the directory of a folder containing various LAS/LAZ files into your clipboard and run this line
-#' setwd(parentDirectory)
-#' files <- list.files(pattern="*.laz")
-#' for(file in files){
-#'   reclassifyLAZ(file)
-#' }
+#' #parentDirectory <- readClipboard() # Read the directory of a folder containing various LAS/LAZ files into your clipboard and run this line
+#' #setwd(parentDirectory)
+#' #files <- list.files(pattern="*.laz")
+#' #for(file in files){
+#' #   reclassifyLAZ(file)
+#' #}
 reclassifyLAZ <- function(lazFile,lazClasses = c(3,4,5,6)){
   las <- lidR::readLAS(lazFile)
   for(class in lazClasses){

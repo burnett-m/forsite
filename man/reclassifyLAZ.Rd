@@ -18,10 +18,10 @@ LAZ/LAS files
 This tool reclassifies all of the LAZ/LAS files within a list to change a series of classes to become unclassified. This is useful for seg cal and other various PowerPoint presentations.
 }
 \examples{
-parentDirectory <- readClipboard() # Read the directory of a folder containing various LAS/LAZ files into your clipboard and run this line
-setwd(parentDirectory)
-files <- list.files(pattern="*.laz")
-for(file in files){
-  reclassifyLAZ(file)
-}
+#parentDirectory <- readClipboard() # Read the directory of a folder containing various LAS/LAZ files into your clipboard and run this line
+#setwd(parentDirectory)
+#files <- list.files(pattern="*.laz")
+#for(file in files){
+#   reclassifyLAZ(file)
+#}
 }

@@ -8,10 +8,10 @@
 #' @export slim_workbook
 #'
 #' @examples
-#' main_dir <- "C:/Forsite"
-#' setwd(main_dir)
-#' filename <- "WF_AreaD_AllSpecies_Scorecard_Nargess.xlsm"
-#' slim_workbook(filename)
+#' #main_dir <- "C:/Forsite"
+#' #setwd(main_dir)
+#' #filename <- "WF_AreaD_AllSpecies_Scorecard_Nargess.xlsm"
+#' #slim_workbook(filename)
 slim_workbook <- function(filename){
   file_extension <- paste0(".",sub("^[^.]*\\.", "", filename)) # Get file extension
   wb <- openxlsx2::wb_load(filename) # Read workbook

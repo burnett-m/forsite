@@ -5,13 +5,14 @@
 #' @param output filename : The output location for the "fixed" shapefile.
 #'
 #' @return shapefile
+#' @importFrom magrittr %>%
 #' @export changeZgeometry_fromHeight
 #'
 #' @examples
-#' shpDir <- readClipboard() # Read the directory path of the folder containing the shapefile you would like to fix
-#' setwd(shpDir)
-#' files <- list.files(pattern="*.shp")
-#' changeZgeometry_fromHeight(files[1]) # Fixes the Z geometry of the first shapefile listed in that directory
+#' #shpDir <- readClipboard() # Read the directory path of the folder containing the shapefile you would like to fix
+#' #setwd(shpDir)
+#' #files <- list.files(pattern="*.shp")
+#' #changeZgeometry_fromHeight(files[1]) # Fixes the Z geometry of the first shapefile listed in that directory
 changeZgeometry_fromHeight <- function(shapefile,output = gsub(".shp","_fixedZ.shp",shapefile)){
   shp <- sf::read_sf(shapefile)
   if("HEIGHT" %in% colnames(shp)){

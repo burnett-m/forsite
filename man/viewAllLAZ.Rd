@@ -20,8 +20,8 @@ viewAllLAZ
 Displays all LAZ files  from a list, one by one.
 }
 \examples{
-parentDir <- readClipboard() # Read the directory path of a folder containing several LAZ/LAS files
-setwd(parentDir)
-files <- list.files(pattern="*.laz")
-for(file in files){viewAllLAS(file)}
+#parentDir <- readClipboard() # Read the directory path of a folder containing several LAZ/LAS files
+#setwd(parentDir)
+#files <- list.files(pattern="*.laz")
+#for(file in files){viewAllLAS(file)}
 }

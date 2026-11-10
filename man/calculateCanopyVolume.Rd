@@ -30,10 +30,10 @@ Clipped LAZ and an updated shapefile containing the CANOPYVOL field
 Calculate Canopy Volume
 }
 \examples{
-lazDir <- readClipboard() # Copy the path to the LAZ files from File Explorer
-setwd(lazDir)
-lazFiles <- list.files(pattern="*.laz")
-shapefile <- "initialShapes.shp"
-dir.create("output")
-calculateCanopyVolume(lazFiles,shapefile,threshold=10,outputDir=paste0(getwd(),"//output"))
+#lazDir <- readClipboard() # Copy the path to the LAZ files from File Explorer
+#setwd(lazDir)
+#lazFiles <- list.files(pattern="*.laz")
+#shapefile <- "initialShapes.shp"
+#dir.create("output")
+#calculateCanopyVolume(lazFiles,shapefile,threshold=10,outputDir=paste0(getwd(),"//output"))
 }

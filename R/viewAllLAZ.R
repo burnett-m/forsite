@@ -8,10 +8,10 @@
 #'
 #' @export viewAllLAZ
 #' @examples
-#' parentDir <- readClipboard() # Read the directory path of a folder containing several LAZ/LAS files
-#' setwd(parentDir)
-#' files <- list.files(pattern="*.laz")
-#' for(file in files){viewAllLAS(file)}
+#' #parentDir <- readClipboard() # Read the directory path of a folder containing several LAZ/LAS files
+#' #setwd(parentDir)
+#' #files <- list.files(pattern="*.laz")
+#' #for(file in files){viewAllLAS(file)}
 viewAllLAZ <- function(lazFile,plotView = FALSE){
   temp_laz <- lidR::readLAS(lazFile)
   if(lidR::is.empty(temp_laz)){ # In case there is no LAZ
