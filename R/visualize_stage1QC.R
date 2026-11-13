@@ -33,7 +33,7 @@
 #'  # UncoveredThreshold = 40)
 #'
 
-visualize_stage1QC <- function(productionPolys,mergedCSV,s3Bucket,s3LAZ_dir,s3stage1_dir,s3_stage1QC_dir,output,UncoveredThreshold = 50){
+visualize_stage1QC <- function(productionPolys,mergedCSV,s3Bucket,s3LAZ_dir,s3stage1_dir,s3_stage1QC_dir,output,UncoveredThreshold = 50,Min_Total_Pixels=1000){
   checkOutput <- substr(output,nchar(output)-1,nchar(output))
   mergedCSV_df <- read.csv(mergedCSV)
   # Error messages
@@ -74,9 +74,12 @@ visualize_stage1QC <- function(productionPolys,mergedCSV,s3Bucket,s3LAZ_dir,s3st
   prodPolys <- sf::read_sf(productionPolys)
 
   mergedCSV_df_subset <- mergedCSV_df[mergedCSV_df$UncoveredArea_Percent > UncoveredThreshold,]
+  mergedCSV_df_subset <- mergedCSV_df_subset[mergedCSV_df_subset$Total_Px > Min_Total_Pixels,]
   prodPolys_subset <- prodPolys[prodPolys$PRODGRIDID %in% mergedCSV_df_subset$PRODGRIDID,]
   prodPolys_subset <- sf::st_transform(prodPolys_subset,4326) # Convert to Lat Long
   prodPolys_subset <- sf::st_make_valid(prodPolys_subset) # Ensure geometry is valid
+
+  message(paste0("There are ",as.character(nrow(mergedCSV_df_subset))," polys with over ",as.character(Min_Total_Pixels)," uncovered pixels..."))
 
   # Prepare the shiny app
   ui <- shiny::fluidPage(leaflet::leafletOutput("map"))
@@ -99,20 +102,3 @@ visualize_stage1QC <- function(productionPolys,mergedCSV,s3Bucket,s3LAZ_dir,s3st
   shiny::shinyApp(ui,server)
 }
 
-# visualize_stage1QC("C:\\Forsite\\Interfor\\INTERFOR_ProductionPolys.shp",
-#                    "C:\\Forsite\\Interfor\\stage1_qc\\_MergedCSV.csv",
-#                    "interfor.1686-7",
-#                    "Production/clean_las_year1/clean/",
-#                    "Production/stage1/",
-#                    "Production/stage1/SegmentationQC/",
-#                    "C:\\Forsite\\Interfor\\stage1_qc\\out",
-#                    UncoveredThreshold = 70)
-#
-# visualize_stage1QC("C:\\Forsite\\LakeBabine\\Lake_Babine_ProductionPolys.shp",
-#                    "C:\\Forsite\\LakeBabine\\stage1_multiseg\\burnt_areas_SegCal\\Merged_QC\\_MergedCSV.csv",
-#                    "lake.babine.2016-2",
-#                    "production/clean_las/clean/",
-#                    "production/stage1_multiseg/",
-#                    "production/stage1_multiseg/_QC/",
-#                    "C:\\Forsite\\LakeBabine\\stage1_multiseg\\burnt_areas_SegCal\\Merged_QC\\out",
-#                    UncoveredThreshold = 40)
